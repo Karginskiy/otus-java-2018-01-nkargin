@@ -10,7 +10,7 @@
 
     <packaging>jar</packaging>
 
-    <name>Otus Java Homework Repository</name>
+    <name>otus_homework_repository</name>
     <developers>
         <developer>
             <name>Nikita Kargin</name>
@@ -27,6 +27,7 @@
     </dependencies>
 
     <build>
+        <finalName>${project.name}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
