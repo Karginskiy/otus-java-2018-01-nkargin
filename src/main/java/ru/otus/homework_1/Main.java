@@ -17,7 +17,7 @@ public class Main {
     private static class Listener {
         @Subscribe
         public void argsCame(String arg) {
-            System.out.println(String.format("Arg: - %s has been came", arg));
+            System.out.println(String.format("Arg: %s - has been came", arg));
         }
     }
 }
