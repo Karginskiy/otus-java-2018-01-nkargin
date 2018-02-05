@@ -51,7 +51,7 @@ public class InstanceMeasurement {
                 Object instance = aClass.newInstance();
                 objects.add(instance);
             } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
+                logger.error("Cannot generate instance of {}. No accessible constructor exists.", aClass.getCanonicalName());
             }
         }
 
