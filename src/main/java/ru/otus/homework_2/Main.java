@@ -23,8 +23,8 @@ public class Main {
             return;
         }
 
-        InstanceMeasurement instanceMeasurement = new InstanceMeasurement();
-        instanceMeasurement.measure(classNames)
+        DefaultInstanceMeasurement defaultInstanceMeasurement = new DefaultInstanceMeasurement();
+        defaultInstanceMeasurement.measure(classNames)
                 .entrySet()
                 .stream()
                 .map(entry -> format(HAS_SIZE_MESSAGE, entry.getKey(), entry.getValue()))

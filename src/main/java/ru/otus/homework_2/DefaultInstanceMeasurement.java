@@ -16,9 +16,9 @@ import static java.util.stream.Collectors.toMap;
  * hei@spark-mail.ru
  *
  */
-public class InstanceMeasurement {
+public class DefaultInstanceMeasurement {
 
-    private static final Logger logger = LoggerFactory.getLogger(InstanceMeasurement.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultInstanceMeasurement.class);
 
     private ObjectSizeCalculator sizeCalculator = new ReflectionSizeCalculator();
 
