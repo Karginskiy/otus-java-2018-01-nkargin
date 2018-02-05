@@ -18,7 +18,8 @@ public class ReflectionSizeCalculator implements ObjectSizeCalculator {
 
     @Override
     public long calculate(Object o) {
-        return recursiveCalculateFieldSize(o.getClass()).reduce(HEADER_SIZE, Long::sum);
+        Long rawSize = recursiveCalculateFieldSize(o.getClass()).reduce(HEADER_SIZE, Long::sum);
+        return rawSize % 8 != 0 ? setAlignment(rawSize) : rawSize;
     }
 
     private Stream<Long> recursiveCalculateFieldSize(Class<?> aClass) {
@@ -32,4 +33,11 @@ public class ReflectionSizeCalculator implements ObjectSizeCalculator {
                 .filter(field -> !isStatic(field.getModifiers()))
                 .flatMap(field -> recursiveCalculateFieldSize(field.getType())));
     }
+
+    private long setAlignment(Long rawSize) {
+        long mod = rawSize % 8;
+        return mod != 0 ? rawSize + (8 - mod) : rawSize;
+    }
+
+
 }
