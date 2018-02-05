@@ -83,7 +83,7 @@
                 </executions>
                 <configuration>
                     <obfuscate>true</obfuscate>
-                    <injar>${project.build.finalName}.jar</injar>
+                    <injar>${project.build.finalName}-jar-with-dependencies.jar</injar>
                     <outjar>${project.build.finalName}-small.jar</outjar>
                     <outputDirectory>${project.build.directory}</outputDirectory>
                     <proguardInclude>${basedir}/proguard.conf</proguardInclude>
