@@ -1,10 +1,10 @@
 package ru.otus.homework_2.calculation;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static java.lang.reflect.Modifier.isStatic;
-import static java.util.stream.Stream.concat;
 import static java.util.stream.Stream.of;
 import static ru.otus.homework_2.calculation.MeasurementUtils.isPrimitive;
 
@@ -18,7 +18,10 @@ public class ReflectionSizeCalculator implements ObjectSizeCalculator {
 
     @Override
     public long calculate(Object o) {
-        Long rawSize = recursiveCalculateFieldSize(o.getClass()).reduce(HEADER_SIZE, Long::sum);
+        Long rawSize = Arrays.stream(o.getClass().getDeclaredFields())
+                .map(Field::getType)
+                .flatMap(this::recursiveCalculateFieldSize)
+                .reduce(HEADER_SIZE, Long::sum);
         return rawSize % 8 != 0 ? setAlignment(rawSize) : rawSize;
     }
 
@@ -27,11 +30,11 @@ public class ReflectionSizeCalculator implements ObjectSizeCalculator {
             return of(aClass).map(Types::getSizeForClass);
         }
 
-        return concat(of(aClass).map(Types::getSizeForClass), of(aClass)
+        return of(aClass)
                 .map(aClass1 -> Arrays.stream(aClass1.getDeclaredFields()))
                 .flatMap(field -> field)
                 .filter(field -> !isStatic(field.getModifiers()))
-                .flatMap(field -> recursiveCalculateFieldSize(field.getType())));
+                .flatMap(field -> recursiveCalculateFieldSize(field.getType()));
     }
 
     private long setAlignment(Long rawSize) {
