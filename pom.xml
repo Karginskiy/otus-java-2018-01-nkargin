@@ -39,6 +39,27 @@
             <artifactId>slf4j-jdk14</artifactId>
             <version>${slf4j-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -50,7 +71,12 @@
                     <archive>
                         <manifest>
                             <mainClass>ru.otus.homework_2.Main</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
+                        <manifestEntries>
+                            <Premain-Class>ru.otus.homework_2.calculator.InstrumentationSizeCalculator</Premain-Class>
+                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
@@ -70,7 +96,12 @@
                             <mainClass>
                                 ru.otus.homework_2.Main
                             </mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
+                        <manifestEntries>
+                            <Premain-Class>ru.otus.homework_2.calculator.InstrumentationSizeCalculator</Premain-Class>
+                        </manifestEntries>
                     </archive>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -110,6 +141,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

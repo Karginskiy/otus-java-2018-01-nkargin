@@ -1,4 +1,4 @@
-package ru.otus.homework_2.calculation;
+package ru.otus.homework_2.model;
 
 import java.util.Map;
 

@@ -1,8 +1,8 @@
-package ru.otus.homework_2.calculation;
+package ru.otus.homework_2.calculator;
 
 /**
  *
- * Main object size calculation interface.
+ * Main object size calculator interface.
  *
  * Created by nkargin on 05.02.2018.
  * hei@spark-mail.ru
@@ -15,5 +15,6 @@ public interface ObjectSizeCalculator {
      */
 
     long calculate(Object o);
+    String getMessage();
 
 }

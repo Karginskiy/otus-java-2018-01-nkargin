@@ -1,4 +1,4 @@
-package ru.otus.homework_2.calculation;
+package ru.otus.homework_2.utils;
 
 /**
  * Created by nkargin on 05.02.2018.
