@@ -19,7 +19,6 @@ import static java.lang.String.format;
 public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
-    private static final String HAS_SIZE_MESSAGE = "%s empty instance has size ~= %d";
     private List<ObjectSizeCalculator> calculators = new ArrayList<ObjectSizeCalculator>() {{
         add(new ReflectionSizeCalculator());
         add(new InstrumentationSizeCalculator());

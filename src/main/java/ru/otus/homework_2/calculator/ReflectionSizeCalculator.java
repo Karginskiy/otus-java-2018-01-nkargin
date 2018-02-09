@@ -1,16 +1,12 @@
 package ru.otus.homework_2.calculator;
 
-import org.apache.commons.lang3.tuple.Pair;
 import ru.otus.homework_2.model.Types;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.lang.reflect.Modifier.isStatic;
-import static java.util.Arrays.stream;
 import static java.util.stream.Stream.concat;
 import static java.util.stream.Stream.of;
 import static ru.otus.homework_2.utils.MeasurementUtils.isArray;
