@@ -1,9 +1,11 @@
 package ru.otus.homework_2.calculator;
 
+import com.google.common.primitives.Primitives;
 import ru.otus.homework_2.model.Types;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.lang.reflect.Modifier.isStatic;
@@ -24,14 +26,17 @@ public class ReflectionSizeCalculator implements ObjectSizeCalculator {
 
     @Override
     public long calculate(Object o) {
-        Long rawSize = recursiveCalculateFieldSize(o).reduce(HEADER_SIZE, Long::sum);
-
+        Class<?> aClass = o.getClass();
+        if (Number.class.isAssignableFrom(aClass) || Character.class == aClass) {
+            return Types.getSizeForClass(Primitives.unwrap(aClass));
+        }
+        Long rawSize = recursiveCalculateFieldSize(o).reduce(0L, Long::sum);
         return rawSize % 8 != 0 ? setAlignment(rawSize) : rawSize;
     }
 
     @Override
     public String getMessage() {
-        return SIZE_MESSAGE;
+        return SIZE_MESSAGE + getUnits();
     }
 
     private Stream<Long> recursiveCalculateFieldSize(Object underlying) {
@@ -47,6 +52,10 @@ public class ReflectionSizeCalculator implements ObjectSizeCalculator {
         if (isArray(aClass)) {
             int length = Array.getLength(underlying);
             Stream<Long> stream = of(ARRAY_HEADER_SIZE);
+            Class<?> componentType = aClass.getComponentType();
+            if (isPrimitive(componentType)) {
+                return concat(stream, IntStream.range(0, length).mapToObj(index -> Types.getSizeForClass(componentType)));
+            }
             for (int i = 0; i < length; i++) {
                 final Object o = Array.get(underlying, i);
                 if (o != null) {
@@ -57,7 +66,7 @@ public class ReflectionSizeCalculator implements ObjectSizeCalculator {
             return stream;
         }
 
-        Stream<Long> referenceSizeStream = Stream.of();
+        Stream<Long> referenceSizeStream = Stream.of(HEADER_SIZE);
 
         for (Field field : aClass.getDeclaredFields()) {
             field.setAccessible(true);

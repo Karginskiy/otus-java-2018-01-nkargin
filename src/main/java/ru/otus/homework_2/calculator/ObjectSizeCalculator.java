@@ -17,4 +17,8 @@ public interface ObjectSizeCalculator {
     long calculate(Object o);
     String getMessage();
 
+    default String getUnits() {
+        return ", bytes";
+    }
+
 }

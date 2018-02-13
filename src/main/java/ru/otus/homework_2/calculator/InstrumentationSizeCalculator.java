@@ -25,6 +25,6 @@ public class InstrumentationSizeCalculator implements ObjectSizeCalculator {
 
     @Override
     public String getMessage() {
-        return SIZE_MESSAGE;
+        return SIZE_MESSAGE + getUnits();
     }
 }
