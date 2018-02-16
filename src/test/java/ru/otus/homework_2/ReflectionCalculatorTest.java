@@ -1,3 +1,5 @@
+package ru.otus.homework_2;
+
 import org.junit.Test;
 import ru.otus.homework_2.calculator.ObjectSizeCalculator;
 import ru.otus.homework_2.calculator.ReflectionSizeCalculator;

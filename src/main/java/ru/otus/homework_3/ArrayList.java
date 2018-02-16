@@ -2,7 +2,6 @@ package ru.otus.homework_3;
 
 import java.lang.reflect.Array;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -16,6 +15,12 @@ public class ArrayList<T> implements List<T> {
 
     private int size;
     private T[] data;
+
+    @SuppressWarnings("unchecked")
+    public ArrayList() {
+        this.data = (T[]) new Object[10];
+        this.size = 0;
+    }
 
     @Override
     public int size() {
@@ -49,14 +54,16 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public Object[] toArray() {
-        return data;
+        Object[] objects = (Object[]) Array.newInstance(data.getClass().getComponentType(), size);
+        System.arraycopy(data, 0, objects, 0, size);
+        return objects;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public <T1> T1[] toArray(T1[] a) {
         if (a.length >= data.length) {
-            System.arraycopy(data, 0, a, 0, data.length);
+            System.arraycopy(data, 0, a, 0, size);
             return a;
         } else {
             Class<?> targetArrayType = a.getClass().getComponentType();
@@ -65,7 +72,7 @@ public class ArrayList<T> implements List<T> {
                 throw new ArrayStoreException();
             }
 
-            T1[] resultArray = (T1[]) Array.newInstance(targetArrayType, data.length);
+            T1[] resultArray = (T1[]) Array.newInstance(targetArrayType, size);
             for (int i = 0; i < resultArray.length; i++) {
                 resultArray[i] = (T1) data[i];
             }
@@ -219,7 +226,10 @@ public class ArrayList<T> implements List<T> {
     @Override
     public T remove(int index) {
         T previous = get(index);
-        System.arraycopy(data, index + 1, data, index, data.length - index);
+        if (previous != null) {
+            System.arraycopy(data, index + 1, data, index, size - index);
+            size--;
+        }
         return previous;
     }
 
@@ -262,71 +272,86 @@ public class ArrayList<T> implements List<T> {
 
     private class SimpleIterator implements Iterator<T> {
 
-        private int nextPosition;
-        private int previousPosition;
+        protected int nextPosition;
+        protected int indexOfLastReturned;
 
         @Override
         public boolean hasNext() {
-            return nextPosition >= size;
+            return nextPosition != size;
         }
 
         @Override
         public T next() {
-            return data[nextPosition];
+            if (nextPosition >= size) {
+                throw new NoSuchElementException();
+            }
+            T el = data[nextPosition];
+            indexOfLastReturned = nextPosition;
+            nextPosition++;
+            return el;
+        }
+
+        @Override
+        public void remove() {
+            ArrayList.this.remove(indexOfLastReturned);
+            indexOfLastReturned = -1;
         }
     }
 
     private class ListItr extends SimpleIterator implements java.util.ListIterator<T> {
 
+        private int previousPosition;
+
         @Override
         public boolean hasNext() {
-            return false;
+            return super.hasNext();
         }
 
         @Override
         public T next() {
-            return null;
+            return super.next();
         }
 
         @Override
         public boolean hasPrevious() {
-            return false;
+            return previousPosition >= 0;
         }
 
         @Override
         public T previous() {
-            return null;
+            if (previousPosition < 0) {
+                throw new NoSuchElementException();
+            }
+
+            indexOfLastReturned = previousPosition;
+            T datum = data[previousPosition];
+            previousPosition--;
+            return datum;
         }
 
         @Override
         public int nextIndex() {
-            return 0;
+            return nextPosition;
         }
 
         @Override
         public int previousIndex() {
-            return 0;
+            return previousPosition;
         }
 
         @Override
         public void remove() {
-
-        }
-
-        @Override
-        public void forEachRemaining(Consumer action) {
-
+            super.remove();
         }
 
         @Override
         public void set(T t) {
-
+            data[indexOfLastReturned] = t;
         }
 
         @Override
         public void add(T t) {
-
+            throw new UnsupportedOperationException();
         }
     }
-
 }
