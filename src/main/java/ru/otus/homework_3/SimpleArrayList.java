@@ -11,13 +11,13 @@ import static java.util.stream.IntStream.range;
  * Created by nkargin on 15.02.2018.
  * hei@spark-mail.ru
  */
-public class ArrayList<T> implements List<T> {
+public class SimpleArrayList<T> implements List<T> {
 
     private int size;
     private T[] data;
 
     @SuppressWarnings("unchecked")
-    public ArrayList() {
+    public SimpleArrayList() {
         this.data = (T[]) new Object[10];
         this.size = 0;
     }
@@ -293,7 +293,7 @@ public class ArrayList<T> implements List<T> {
 
         @Override
         public void remove() {
-            ArrayList.this.remove(indexOfLastReturned);
+            SimpleArrayList.this.remove(indexOfLastReturned);
             indexOfLastReturned = -1;
         }
     }
@@ -351,7 +351,7 @@ public class ArrayList<T> implements List<T> {
 
         @Override
         public void add(T t) {
-            throw new UnsupportedOperationException();
+            SimpleArrayList.this.add(indexOfLastReturned, t);
         }
     }
 }
