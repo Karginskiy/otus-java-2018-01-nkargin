@@ -12,9 +12,9 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * Created by nkargin on 16.02.2018.
  * hei@spark-mail.ru
  */
-public class ArrayListTests {
+public class SimpleArrayListTests {
 
-    private static final ArrayList<String> strings = new ArrayList<>();
+    private static final SimpleArrayList<String> strings = new SimpleArrayList<>();
 
     @Before
     public void initList() {
