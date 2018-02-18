@@ -12,7 +12,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * Created by nkargin on 16.02.2018.
  * hei@spark-mail.ru
  */
-public class SimpleArrayListTests {
+public class SimpleArrayListTest {
 
     private static final SimpleArrayList<String> strings = new SimpleArrayList<>();
 
@@ -34,7 +34,7 @@ public class SimpleArrayListTests {
 
     @Test
     public void testRemoveObject() {
-        boolean remove = strings.remove("123");
+        boolean remove = strings.remove("bbb2");
 
         assertThat(strings.size(), equalTo(4));
         assertThat(remove, equalTo(true));
@@ -44,7 +44,7 @@ public class SimpleArrayListTests {
     public void testRemoveByIndex() {
         String remove = strings.remove(1);
 
-        assertThat(remove, equalTo("155"));
+        assertThat(remove, equalTo("bbb2"));
         assertThat(strings.size(), equalTo(4));
     }
 

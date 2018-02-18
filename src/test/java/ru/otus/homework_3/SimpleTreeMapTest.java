@@ -10,7 +10,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * Created by nkargin on 18.02.2018.
  * hei@spark-mail.ru
  */
-public class SimpleTreeMapTests {
+public class SimpleTreeMapTest {
 
     private static final SimpleTreeMap<Integer, String> treeMap = new SimpleTreeMap<>();
 

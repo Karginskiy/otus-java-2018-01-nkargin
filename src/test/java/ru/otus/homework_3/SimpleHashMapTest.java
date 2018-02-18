@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  * Created by nkargin on 18.02.2018.
  * hei@spark-mail.ru
  */
-public class SimpleHashMapTests {
+public class SimpleHashMapTest {
 
     private static SimpleHashMap<String, String> testMap = new SimpleHashMap<>();
 
