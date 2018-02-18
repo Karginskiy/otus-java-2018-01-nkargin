@@ -36,6 +36,11 @@ public class SimpleHashMap<K, V> implements Map<K, V> {
 
     public SimpleHashMap(int capacity) {
         int nextPowerOfTwo = getNextPowerOfTwo(capacity);
+
+        if (nextPowerOfTwo > MAX_SIZE) {
+            throw new IllegalArgumentException("Too much size for this map! Please get value lesser or equal to 2 ^ 30");
+        }
+
         this.data = (Node<K, V>[]) new Node[capacity];
         this.size = 0;
         this.loadFactor = DEFAULT_LOAD_FACTOR;
