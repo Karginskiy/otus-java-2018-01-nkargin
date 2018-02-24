@@ -11,6 +11,7 @@
         <module>homework_1</module>
         <module>homework_2</module>
         <module>homework_3</module>
+        <module>homework_4</module>
     </modules>
 
     <packaging>pom</packaging>
