@@ -9,9 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>homework_4</artifactId>
+    <artifactId>homework_5</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -21,5 +25,4 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
-
 </project>

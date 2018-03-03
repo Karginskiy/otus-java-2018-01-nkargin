@@ -12,6 +12,7 @@
         <module>homework_2</module>
         <module>homework_3</module>
         <module>homework_4</module>
+        <module>homework_5</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -31,6 +32,7 @@
         <commons.collections.version>4.1</commons.collections.version>
         <commons.lang.version>3.7</commons.lang.version>
         <junit.version>4.12</junit.version>
+        <reflections.library.version>0.9.10</reflections.library.version>
 
         <source.version>1.8</source.version>
         <target.version>1.8</target.version>
@@ -68,6 +70,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons.lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.library.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
